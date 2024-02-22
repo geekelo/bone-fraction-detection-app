@@ -6,6 +6,7 @@ import Resource from './resource';
 const MainPane = () => {
   const [selectedTab, setSelectedTab] = useState('all');
   const [resources, setResources] = useState([]);
+  let allResource;
 
   const fetchResources = async () => {
     try {
@@ -87,6 +88,21 @@ const MainPane = () => {
     setSelectedTab(tab);
   };
 
+  if (resources.length > 1) {
+    const img = [...resources[0].images, resources[1].images, resources[2].images];
+    const lab = [...resources[0].labels, resources[1].labels, resources[2].labels];
+    const thumb = [...resources[0].thumbnails, resources[1].thumbnails, resources[2].thumbnails];
+    allResource = [
+      {
+        images: img,
+        labels: lab,
+        thumbnails: thumb,
+      },
+    ];
+  } else {
+    allResource = resources;
+  }
+
   return (
     <div>
       {/* Tabs */}
@@ -107,7 +123,7 @@ const MainPane = () => {
 
       {/* Image Grid */}
       <div>
-        {resources.map((resource, i) => (
+        {allResource.map((resource, i) => (
           <Resource key={0} index={i} resource={resource} />
         ))}
       </div>

@@ -31,3 +31,11 @@
   height: 100px;
   object-fit: cover;
 }
+
+.annotation {
+  position: relative;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  color: white;
+}
