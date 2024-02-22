@@ -2,10 +2,12 @@ import React, { useState, useEffect } from 'react';
 import AWS from 'aws-sdk'; // Make sure you've installed and configured AWS SDK
 // import YAML from 'yaml';
 import Resource from './resource';
+import Navbar from './navbar';
 
 const MainPane = () => {
   const [selectedTab, setSelectedTab] = useState('all');
   const [resources, setResources] = useState([]);
+  const [classNames, setClassNames] = useState([]);
   let allResource;
 
   const fetchResources = async () => {
@@ -103,29 +105,37 @@ const MainPane = () => {
     allResource = resources;
   }
 
-  return (
-    <div>
-      {/* Tabs */}
-      <div>
-        <button type="submit" onClick={() => handleTabChange('all')}>
-          All Groups
-        </button>
-        <button type="submit" onClick={() => handleTabChange('train')}>
-          Train
-        </button>
-        <button type="submit" onClick={() => handleTabChange('valid')}>
-          Valid
-        </button>
-        <button type="submit" onClick={() => handleTabChange('test')}>
-          Test
-        </button>
-      </div>
+  const handleIndexClick = (params) => {
+    setClassNames(params);
+  };
 
-      {/* Image Grid */}
-      <div>
-        {allResource.map((resource, i) => (
-          <Resource key={0} index={i} resource={resource} />
-        ))}
+  return (
+    <div className="main-cont">
+      <div className="navbar">
+        <Navbar handleIndexClick={handleIndexClick} />
+      </div>
+      {/* Tabs */}
+      <div className="home">
+        <div>
+          <button type="submit" onClick={() => handleTabChange('all')}>
+            All Groups
+          </button>
+          <button type="submit" onClick={() => handleTabChange('train')}>
+            Train
+          </button>
+          <button type="submit" onClick={() => handleTabChange('valid')}>
+            Valid
+          </button>
+          <button type="submit" onClick={() => handleTabChange('test')}>
+            Test
+          </button>
+        </div>
+        {/* Image Grid */}
+        <div>
+          {allResource.map((resource, i) => (
+            <Resource key={0} index={i} resource={resource} classNames={classNames} />
+          ))}
+        </div>
       </div>
     </div>
   );

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Image from './image';
 
-function Resource({ resource }) {
+function Resource({ resource, classNames }) {
   const labelsAll = resource.labels;
   const thumbnailsAll = resource.thumbnails;
   const thumbnailsPerPage = 32;
@@ -29,6 +29,7 @@ function Resource({ resource }) {
           index={indexOfFirstThumbnail + index}
           thumbnail={thumbnail}
           label={labelsAll[indexOfFirstThumbnail + index]} // Pass the corresponding label
+          classNames={classNames}
         />
       ))}
 

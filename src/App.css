@@ -12,6 +12,7 @@
 
 .home {
   width: 68%;
+  float: right;
 }
 
 .image-cont {
@@ -22,7 +23,7 @@
 
 .image {
   width: 100px;
-  height: 100px; 
+  height: 120px; 
   overflow: hidden;
 }
 
@@ -33,9 +34,6 @@
 }
 
 .annotation {
-  position: relative;
-  top: 0;
-  left: 0;
-  z-index: 2;
-  color: white;
+  margin: 0;
+  padding: 0;
 }

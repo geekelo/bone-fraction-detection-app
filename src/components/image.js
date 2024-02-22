@@ -2,70 +2,70 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import AWS from 'aws-sdk';
 
-function Image({ thumbnail, label }) {
-  const [annotations, setAnnotations] = useState([]);
+function Image({
+  thumbnail,
+  label,
+  classNames,
+}) {
+  console.log(classNames);
+  const [classIndex, setClassIndex] = useState(null);
+  const imageNames = [
+    'Elbow positive',
+    'Fingers positive',
+    'Forearm fracture',
+    'Humerus fracture',
+    'Humerus',
+    'Shoulder fracture',
+    'Wrist positive',
+  ];
 
   useEffect(() => {
-    // Fetch label data from AWS S3
-    const fetchLabels = async () => {
+    const fetchClassIndex = async () => {
       try {
-        // Configure AWS credentials and region
         AWS.config.update({
-          region: 'eu-central-1', // Update with your AWS region
+          region: 'eu-central-1',
           credentials: new AWS.CognitoIdentityCredentials({
-            IdentityPoolId: 'eu-central-1:31ebe2ab-fc9d-4a2c-96a9-9dee9a9db8b9', // Update with your Identity Pool ID
+            IdentityPoolId: 'eu-central-1:31ebe2ab-fc9d-4a2c-96a9-9dee9a9db8b9',
           }),
         });
 
         const s3 = new AWS.S3({
           apiVersion: '2006-03-01',
-          params: { Bucket: 'dataspan.frontend-home-assignment' }, // Update with your bucket name
+          params: { Bucket: 'dataspan.frontend-home-assignment' },
         });
 
-        // Fetch label file content
         const labelContent = await s3.getObject({ Bucket: 'dataspan.frontend-home-assignment', Key: label }).promise();
         const labelData = labelContent.Body.toString('utf-8');
 
-        // Parse label data
-        const annotations = labelData.split('\n').map((line) => {
-          const [classIndex, ...bbox] = line.trim().split(' ').map(parseFloat);
-          return { classIndex, bbox };
-        });
-
-        // Set annotations state
-        setAnnotations(annotations);
+        const [classIdx] = labelData.trim().split(' ').map(parseFloat);
+        setClassIndex(classIdx);
       } catch (error) {
-        console.error('Error fetching labels:', error);
+        console.error('Error fetching class index:', error);
       }
     };
 
-    fetchLabels();
+    fetchClassIndex();
   }, [label]);
 
-  // Destructure href from s3.endpoint
-  const bucketName = 'dataspan.frontend-home-assignment'; // Replace with your bucket name
-  const imageKey = thumbnail; // Replace with the key of your image
-  const region = 'eu-central-1'; // Replace with your AWS region
+  const bucketName = 'dataspan.frontend-home-assignment';
+  const imageKey = thumbnail;
+  const region = 'eu-central-1';
   const s3Endpoint = `https://s3.${region}.amazonaws.com`;
   const imageUrl = `${s3Endpoint}/${bucketName}/${encodeURIComponent(imageKey)}`;
-  console.log(imageUrl);
 
+  const isValidIndex = classNames.length > 0 && classNames.includes(classIndex);
+  if (isValidIndex) {
+    return (
+      <div className="image">
+        <img src={imageUrl} alt="dataImage" width="100" />
+        <p className="annotation">{imageNames[classIndex]}</p>
+      </div>
+    );
+  }
   return (
     <div className="image">
       <img src={imageUrl} alt="dataImage" width="100" />
-      <div className="annotation">
-        <h4>Annotations:</h4>
-        <ul>
-          {annotations.map((annotation) => (
-            <li key={0}>
-              Class Index:
-              {annotation.classIndex}
-              , Bounding Box:
-              {annotation.bbox.join(', ')}
-            </li>
-          ))}
-        </ul>
-      </div>
+      <p className="annotation">{imageNames[classIndex]}</p>
     </div>
   );
 }
@@ -73,6 +73,7 @@ function Image({ thumbnail, label }) {
 Image.propTypes = {
   thumbnail: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
+  classNames: PropTypes.arrayOf(PropTypes.number).isRequired,
 };
 
 export default Image;

@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types'; // Import PropTypes
 import AWS from 'aws-sdk';
 import YAML from 'js-yaml'; // Import YAML parser library
 
-function Navbar() {
+function Navbar({ handleIndexClick }) {
   const [classNames, setClassNames] = useState([]);
+  const [selectedIndexes, setSelectedIndexes] = useState([]);
 
   useEffect(() => {
     const fetchClassNames = async () => {
@@ -22,8 +24,13 @@ function Navbar() {
 
         const yamlContent = await s3.getObject({ Bucket: 'dataspan.frontend-home-assignment', Key: 'bone-fracture-detection/data.yaml' }).promise();
         const yamlData = yamlContent.Body.toString('utf-8');
-        const { names } = YAML.safeLoad(yamlData); // Use YAML.safeLoad to parse YAML content
-        setClassNames(names);
+        const parsedYaml = YAML.load(yamlData);
+
+        if (parsedYaml.names) {
+          setClassNames(parsedYaml.names);
+        } else {
+          console.error('No class names found in YAML data.');
+        }
       } catch (error) {
         console.error('Error fetching class names:', error);
       }
@@ -32,14 +39,39 @@ function Navbar() {
     fetchClassNames();
   }, []);
 
+  const handleCheckboxChange = (index) => {
+    const updatedIndexes = [...selectedIndexes];
+    const currentIndex = updatedIndexes.indexOf(index);
+    if (currentIndex === -1) {
+      updatedIndexes.push(index);
+    } else {
+      updatedIndexes.splice(currentIndex, 1);
+    }
+    setSelectedIndexes(updatedIndexes);
+    handleIndexClick(updatedIndexes);
+  };
+
   return (
     <div>
-      {/* Render the fetched class names */}
+      {/* Render the fetched class names as checkboxes */}
       {classNames.map((className, index) => (
-        <div key={index}>{className}</div>
+        <div key={0}>
+          <input
+            type="checkbox"
+            id={`class-${index}`}
+            checked={selectedIndexes.includes(index)}
+            onChange={() => handleCheckboxChange(index)}
+          />
+          <label htmlFor={`class-${index}`}>{className}</label>
+        </div>
       ))}
     </div>
   );
 }
+
+// Add prop validation for handleIndexClick
+Navbar.propTypes = {
+  handleIndexClick: PropTypes.func.isRequired,
+};
 
 export default Navbar;

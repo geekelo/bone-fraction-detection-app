@@ -4,7 +4,6 @@ import MainPane from './mainpane';
 function Home() {
   return (
     <div>
-      Home
       <MainPane />
     </div>
   );
