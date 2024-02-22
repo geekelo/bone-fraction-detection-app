@@ -57,7 +57,7 @@ Resource.propTypes = {
 };
 
 export default Resource;
-
+//
 // import React from 'react';
 // import PropTypes from 'prop-types';
 // import Image from './image';
