@@ -8,7 +8,7 @@ const MainPane = () => {
   const [selectedTab, setSelectedTab] = useState('all');
   const [resources, setResources] = useState([]);
   const [classNames, setClassNames] = useState([]);
-  let allResource;
+  let allResource = [];
 
   const fetchResources = async () => {
     try {
@@ -35,7 +35,7 @@ const MainPane = () => {
       } else {
         selectedFolders = [selectedTab];
       }
-      console.log(selectedFolders);
+
       const directoryPrefixes = await Promise.all(
         selectedFolders.map(async (folder) => {
           const folderPrefix = `${prefix}${folder}/`;
@@ -43,19 +43,15 @@ const MainPane = () => {
         }),
       ).then((directories) => directories.flat());
 
-      console.log(directoryPrefixes);
-
       // Fetch resources for each directory type
       const resourcesData = await Promise.all(
         directoryPrefixes.map(async (directory) => {
           // Fetch images, labels, and thumbnails for the current directory
-          console.log(directory);
           const [imagesData, labelsData, thumbnailsData] = await Promise.all([
             s3.listObjectsV2({ Prefix: `${directory}images/` }).promise(),
             s3.listObjectsV2({ Prefix: `${directory}labels/` }).promise(),
             s3.listObjectsV2({ Prefix: `${directory}thumbnails/` }).promise(),
           ]);
-          console.log(imagesData);
           // Extract keys from the fetched data
           const images = imagesData.Contents.map((image) => image.Key);
           const labels = labelsData.Contents.map((label) => label.Key);
@@ -72,8 +68,6 @@ const MainPane = () => {
           };
         }),
       );
-
-      console.log(resourcesData);
 
       // Set the fetched resources in the state
       setResources(resourcesData);
@@ -94,15 +88,28 @@ const MainPane = () => {
     const img = [...resources[0].images, resources[1].images, resources[2].images];
     const lab = [...resources[0].labels, resources[1].labels, resources[2].labels];
     const thumb = [...resources[0].thumbnails, resources[1].thumbnails, resources[2].thumbnails];
+
+    const truncImg = img.slice(0, 199);
+    const truncLab = lab.slice(0, 199);
+    const truncThumb = thumb.slice(0, 199);
     allResource = [
       {
-        images: img,
-        labels: lab,
-        thumbnails: thumb,
+        images: truncImg,
+        labels: truncLab,
+        thumbnails: truncThumb,
       },
     ];
-  } else {
-    allResource = resources;
+  } else if (resources.length === 1) {
+    const truncImg = resources[0].images.slice(0, 199);
+    const truncLab = resources[0].labels.slice(0, 199);
+    const truncThumb = resources[0].thumbnails.slice(0, 199);
+    allResource = [
+      {
+        images: truncImg,
+        labels: truncLab,
+        thumbnails: truncThumb,
+      },
+    ];
   }
 
   const handleIndexClick = (params) => {
