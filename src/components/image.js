@@ -24,7 +24,8 @@ function Image({
   const imageUrl = `${s3Endpoint}/${bucketName}/${encodeURIComponent(imageKey)}`;
 
   const handleClick = () => {
-    handleClickedThumbnail(id); // Pass up the key when the image is clicked
+    const imageName = imageNames[classIndex] || 'Fracture_1';
+    handleClickedThumbnail(id, imageName); // Pass up the key when the image is clicked
   };
 
   return (
