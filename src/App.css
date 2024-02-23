@@ -35,6 +35,11 @@ body {
   overflow: hidden;
 }
 
+.image button {
+  border: none;
+  padding: 0;
+}
+
 .image img {
   width: 100px;
   height: 100px;
@@ -65,6 +70,7 @@ body {
 .pagination-cont {
   display: flex;
   justify-content: center;
+  margin-top: 20px;
   padding: 5px 20px;
 }
 

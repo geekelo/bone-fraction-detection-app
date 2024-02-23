@@ -63,6 +63,7 @@ function Resource({ resource, classNames }) {
         {currentThumbnails.map(({ classIndex, labelIndex }) => (
           <Image
             key={labelIndex} // Use labelIndex as the key
+            id={labelIndex}
             thumbnail={resource.thumbnails[labelIndex]}
             // Pass thumbnail corresponding to the original index
             classIndex={classIndex} // Pass the class index
