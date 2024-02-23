@@ -2,11 +2,13 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import AWS from 'aws-sdk';
 import Image from './image';
+import Popup from './popup';
 
 function Resource({ resource, classNames }) {
   const [filteredClassIndexes, setFilteredClassIndexes] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [activeBtn, setActiveBtn] = useState(0);
+  const [clickedThumbnail, setClickedThumbnail] = useState([]);
   const thumbnailsPerPage = 32;
 
   useEffect(() => {
@@ -57,15 +59,27 @@ function Resource({ resource, classNames }) {
     setActiveBtn(pageNumber - 1);
   };
 
+  // handle clicked thumbnail
+  const handleClickedThumbnail = (imgIndex, classInd) => {
+    setClickedThumbnail([imgIndex, classInd]);
+  };
+
+  // close popup
+  const closePopup = () => {
+    setClickedThumbnail([]);
+  };
+
   return (
     <div>
       <div className="image-cont">
         {currentThumbnails.map(({ classIndex, labelIndex }) => (
           <Image
             key={labelIndex} // Use labelIndex as the key
+            id={labelIndex}
             thumbnail={resource.thumbnails[labelIndex]}
             // Pass thumbnail corresponding to the original index
             classIndex={classIndex} // Pass the class index
+            handleClickedThumbnail={handleClickedThumbnail}
           />
         ))}
       </div>
@@ -88,6 +102,16 @@ function Resource({ resource, classNames }) {
           :count
         </p>
       </div>
+      {
+        clickedThumbnail.length > 0 ? (
+          <Popup
+            key={0}
+            image={resource.images[clickedThumbnail[0]]}
+            classIndex={clickedThumbnail[1]}
+            closePopup={closePopup}
+          />
+        ) : ''
+      }
     </div>
   );
 }

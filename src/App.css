@@ -35,6 +35,11 @@ body {
   overflow: hidden;
 }
 
+.image button {
+  border: none;
+  padding: 0;
+}
+
 .image img {
   width: 100px;
   height: 100px;
@@ -65,6 +70,7 @@ body {
 .pagination-cont {
   display: flex;
   justify-content: center;
+  margin-top: 20px;
   padding: 5px 20px;
 }
 
@@ -78,4 +84,45 @@ body {
 
 .active {
   background-color: yellow;
+}
+
+.popup-section {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #0000008a;
+}
+
+.popup {
+  position: fixed;
+  top: 10%;
+  bottom: 10%;
+  width: 40%;
+  left: 30%;
+  margin: auto;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.closeBtn {
+  float: right;
+  background-color: #fff;
+  border: none;
+  font-size: 2rem;
+}
+
+.popup-content {
+  clear: right;
+}
+
+.image-name {
+  background-color: yellow;
+  border-radius: 1rem;
+  padding: 0.5rem 1rem;
+  width: 30%;
+  margin-bottom: 15px;
 }

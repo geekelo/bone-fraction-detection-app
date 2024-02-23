@@ -1,7 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function Image({ thumbnail, classIndex }) {
+function Image({
+  id,
+  thumbnail,
+  classIndex,
+  handleClickedThumbnail,
+}) {
   const imageNames = [
     'Elbow positive',
     'Fingers positive',
@@ -18,17 +23,26 @@ function Image({ thumbnail, classIndex }) {
   const s3Endpoint = `https://s3.${region}.amazonaws.com`;
   const imageUrl = `${s3Endpoint}/${bucketName}/${encodeURIComponent(imageKey)}`;
 
+  const handleClick = () => {
+    const imageName = imageNames[classIndex] || 'Fracture_1';
+    handleClickedThumbnail(id, imageName); // Pass up the key when the image is clicked
+  };
+
   return (
     <div className="image">
-      <img src={imageUrl} alt="dataImage" width="100" aria-label={imageNames[classIndex]} />
+      <button type="submit" onClick={handleClick}>
+        <img src={imageUrl} alt="dataImage" width="100" aria-label={imageNames[classIndex]} />
+      </button>
       <p className="annotation">{imageNames[classIndex]}</p>
     </div>
   );
 }
 
 Image.propTypes = {
+  id: PropTypes.number.isRequired, // Key prop renamed to id
   thumbnail: PropTypes.string.isRequired,
   classIndex: PropTypes.number.isRequired,
+  handleClickedThumbnail: PropTypes.func.isRequired, // Function to handle click event
 };
 
 export default Image;
