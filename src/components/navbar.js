@@ -56,7 +56,7 @@ function Navbar({ handleIndexClick }) {
     <div>
       {/* Render the fetched class names as checkboxes */}
       {classNames.map((className, index) => (
-        <div key={0}>
+        <div key={0} className="className-list">
           <input
             type="checkbox"
             id={`class-${index}`}
