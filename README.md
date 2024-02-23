@@ -1,71 +1,158 @@
-# Getting Started with Create React App
+<a name="readme-top"></a>
+<div align="center">
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+ <img src="https://geekelo.com.ng/wp-content/uploads/2023/12/signature.gif" alt="signature" >
+  
+  <br/>
 
-## Available Scripts
+</div>
+<!-- TABLE OF CONTENTS -->
 
-In the project directory, you can run:
+# 📗 Table of Contents
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- [📗 Table of Contents](#-table-of-contents)
+- [📖 LMW Webpage ](#-lmw-webpage-)
+  - [🛠 Built With ](#-built-with-)
+    - [Tech Stack ](#tech-stack-)
+    - [Key Features ](#key-features-)
+  - [🚀 Live Demo ](#-live-demo-)
+  - [💻 Getting Started ](#-getting-started-)
+    - [Setup ](#setup-)
+    - [Prerequisites ](#prerequisites-)
+    <!-- - [Install ](#install-) -->
+    - [Usage ](#usage-)
+    <!-- - [Run Tests ](#run-tests-)
+    - [Deployment ](#deployment-) -->
+  - [👥 Authors ](#-authors-)
+  - [🤝 Contributing ](#-contributing-)
+  - [Future Features ](#future-features-)
+  - [⭐️ Show your support ](#️-show-your-support-)
+  - [🙏 Acknowledgments ](#-acknowledgments-)
+  - [📝 License ](#-license-)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+<!-- PROJECT DESCRIPTION -->
 
-### `npm test`
+<div align="center">
+  <h1>📖 BONE FRACTURES DETECTION APP </h>
+</div>
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+The is a simple application built with React to detect bone fractures
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 🚀 Live Demo <a name="live-demo"></a>
+  - [Demo Link](https://bone-fraction-detection-app.vercel.app/)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## 🛠 Built With <a name="built-with"></a>
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+  <ul>
+    <li>React</li>
+    <li>CSS</li>
+  </ul>
 
-### `npm run eject`
+<!-- Features -->
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Key Features <a name="key-features"></a>
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- [x] **React-Based User Interface**
+- [x] **Modular Structure**
+- [x] **Pagination**
+- [x] **Dynamic display of images based on search or filter terms**
+- [x] **Navigation**
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Team:
+This is a solo project
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Getting Started <a name="getting-started"></a>
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+To get a local copy up and running, follow these steps.
 
-### Code Splitting
+### Prerequisites <a name="prerequisites"></a>
+In order to run this project you need:
+  * A basic understanding of React, Redux and Git
+### Usage <a name="usage"></a>
+1. Clone this repo
+2. Run npm install
+```
+git clone https://github.com/geekelo/bone-fraction-detection-app.git
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+To run the project, execute the following command:
 
-### Analyzing the Bundle Size
+```
+  npm start
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-### Making a Progressive Web App
+<!-- AUTHORS -->
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## 👥 Authors <a name="authors"></a>
 
-### Advanced Configuration
+👤 **Eloghene Otiede**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+- GitHub: [@geekelo](https://github.com/geekelo)
+- LinkedIn: [eloghene-otiede](https://www.linkedin.com/in/eloghene-otiede-b146a3232/)
+- Website: [portfolio](https://geekelo.com.ng/)
 
-### Deployment
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+<!-- FUTURE FEATURES -->
 
-### `npm run build` fails to minify
+## 🔭 Future Features <a name="future-features"></a>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-# bone-fraction-detection-app
+- [ ] **Implement global state management using Redux**
+- [ ] **Styling**
+- [ ] **Display polygons as overlay based on annotations**
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- CONTRIBUTING -->
+
+## 🤝 Contributing <a name="contributing"></a>
+
+Contributions, issues, and feature requests are welcome!
+
+Feel free to check the [issues page](../../issues/).
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- SUPPORT -->
+
+## ⭐️ Show your support <a name="support"></a>
+
+Please support this project and be a part of something meaningful and impactful. Your contribution can make a significant difference and help us achieve our goals faster.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- ACKNOWLEDGEMENTS -->
+
+## 🙏 Acknowledgments <a name="acknowledgements"></a>
+
+I would like to express my sincere gratitude to Savannah Tech team for inspiring this project
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+## :question: FAQ <a name="faq"></a>
+
+- **Can I fork and reuse this repository?**
+
+Absolutely! Please feel free to fork and reuse this repository for your own projects.
+
+- **Is it okay to improve this repository? Will my changes be accepted?**
+
+Definitely! We welcome any improvements or new ideas you may have. If your changes are good and align with the project's goals, we would be happy to accept them.
+
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- LICENSE -->
+
+## 📝 License <a name="license"></a>
+
+This project is [MIT](./LICENCE) licensed.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
