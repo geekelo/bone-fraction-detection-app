@@ -6,6 +6,7 @@ import Image from './image';
 function Resource({ resource, classNames }) {
   const [filteredClassIndexes, setFilteredClassIndexes] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [activeBtn, setActiveBtn] = useState(0);
   const thumbnailsPerPage = 32;
 
   useEffect(() => {
@@ -53,23 +54,30 @@ function Resource({ resource, classNames }) {
   // Handle page change
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
+    setActiveBtn(pageNumber - 1);
   };
 
   return (
-    <div className="image-cont">
-      {currentThumbnails.map(({ classIndex, labelIndex }) => (
-        <Image
-          key={labelIndex} // Use labelIndex as the key
-          thumbnail={resource.thumbnails[labelIndex]}
-          // Pass thumbnail corresponding to the original index
-          classIndex={classIndex} // Pass the class index
-        />
-      ))}
-
+    <div>
+      <div className="image-cont">
+        {currentThumbnails.map(({ classIndex, labelIndex }) => (
+          <Image
+            key={labelIndex} // Use labelIndex as the key
+            thumbnail={resource.thumbnails[labelIndex]}
+            // Pass thumbnail corresponding to the original index
+            classIndex={classIndex} // Pass the class index
+          />
+        ))}
+      </div>
       {/* Pagination */}
-      <div>
+      <div className="pagination-cont">
         {Array.from({ length: totalPages }, (_, index) => (
-          <button type="button" key={index} onClick={() => handlePageChange(index + 1)}>
+          <button
+            type="button"
+            key={index}
+            className={`pagination ${activeBtn === index ? 'active' : ''}`}
+            onClick={() => handlePageChange(index + 1)}
+          >
             {index + 1}
           </button>
         ))}
