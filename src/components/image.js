@@ -1,12 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-function Image({
-  thumbnail,
-  classIndex,
-}) {
-  console.log(classIndex);
-  console.log(thumbnail);
+function Image({ thumbnail, classIndex }) {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const imageNames = [
     'Elbow positive',
     'Fingers positive',
@@ -23,10 +20,47 @@ function Image({
   const s3Endpoint = `https://s3.${region}.amazonaws.com`;
   const imageUrl = `${s3Endpoint}/${bucketName}/${encodeURIComponent(imageKey)}`;
 
+  const handleImageClick = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleModalClick = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      handleImageClick();
+    }
+  };
+
   return (
-    <div className="image">
-      <img src={imageUrl} alt="dataImage" width="100" />
+    <div
+      className="image"
+      role="button"
+      onClick={handleImageClick}
+      onKeyDown={handleKeyDown}
+      tabIndex={0}
+    >
+      <img src={imageUrl} alt="dataImage" width="100" aria-label={imageNames[classIndex]} />
       <p className="annotation">{imageNames[classIndex]}</p>
+
+      {/* Modal */}
+      {isModalOpen && (
+        <div
+          className="modal-overlay"
+          onClick={handleModalClick}
+          onKeyDown={handleModalClick}
+          role="button"
+          tabIndex={0}
+        >
+          <div className="modal-content">
+            <img src={imageUrl} alt="dataImage" />
+            <p>{imageNames[classIndex]}</p>
+            {/* Additional content */}
+          </div>
+        </div>
+      )}
     </div>
   );
 }

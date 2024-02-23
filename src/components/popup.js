@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Label() {
+function Popup() {
   return (
     <div>
       Hello
@@ -8,4 +8,4 @@ function Label() {
   );
 }
 
-export default Label;
+export default Popup;

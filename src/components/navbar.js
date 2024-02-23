@@ -40,22 +40,23 @@ function Navbar({ handleIndexClick }) {
   }, []);
 
   const handleCheckboxChange = (index) => {
-    const updatedIndexes = [...selectedIndexes];
-    const currentIndex = updatedIndexes.indexOf(index);
-    if (currentIndex === -1) {
-      updatedIndexes.push(index);
-    } else {
-      updatedIndexes.splice(currentIndex, 1);
-    }
-    setSelectedIndexes(updatedIndexes);
-    handleIndexClick(updatedIndexes);
+    setSelectedIndexes((prevIndexes) => {
+      const isChecked = prevIndexes.includes(index);
+      if (isChecked) {
+        // If the checkbox is already checked, remove its index
+        return prevIndexes.filter((i) => i !== index);
+      }
+      // If the checkbox is not checked, add its index
+      return [...prevIndexes, index];
+    });
+    handleIndexClick(selectedIndexes); // Pass the updated indexes
   };
 
   return (
     <div>
       {/* Render the fetched class names as checkboxes */}
       {classNames.map((className, index) => (
-        <div key={index}>
+        <div key={0}>
           <input
             type="checkbox"
             id={`class-${index}`}

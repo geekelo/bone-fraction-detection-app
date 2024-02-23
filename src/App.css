@@ -37,3 +37,13 @@
   margin: 0;
   padding: 0;
 }
+
+.modal-overlay {
+  position: fixed;
+  top: 20px;
+  bottom: 20px;
+  width: 30%;
+  margin: auto;
+  display: flex;
+  background-color: red;
+}
