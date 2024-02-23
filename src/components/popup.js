@@ -34,7 +34,7 @@ function Popup({
           <p>{image.split('/').pop()}</p>
           <p>Details:</p>
           <p className="annotation image-name">{classIndex}</p>
-          <img src={imageUrl} alt="dataImage" aria-label={imageNames[classIndex]} />
+          <img src={imageUrl} className="pop-image" alt="dataImage" aria-label={imageNames[classIndex]} />
         </div>
       </div>
     </div>
