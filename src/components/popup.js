@@ -31,11 +31,11 @@ function Popup({
       <div className="popup">
         <button type="submit" className="closeBtn" onClick={handleClosePopup}> X </button>
         <div className="popup-content">
-          <p>{image.split('/').pop()}</p>
+          <p className="popup-title">{image.split('/').pop()}</p>
           <p>Details:</p>
           <p className="annotation image-name">{classIndex}</p>
           <div className="pop-image-cont">
-            <img src={imageUrl} className="pop-image" alt="dataImage" aria-label={imageNames[classIndex]} />
+            <img src={imageUrl} className="pop-image" width="200" alt="dataImage" aria-label={imageNames[classIndex]} />
           </div>
         </div>
       </div>
